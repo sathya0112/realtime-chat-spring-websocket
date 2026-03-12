@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: realtime-chat-app
+  
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/chatapp?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    username: ${SPRING_DATASOURCE_USERNAME:chatuser}
+    password: ${SPRING_DATASOURCE_PASSWORD:chatpass}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+  
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 60000
+
+server:
+  port: 8080
+
+# JWT Configuration
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  expiration: 86400000 # 24 hours in milliseconds
+
+# WebSocket Configuration
+websocket:
+  allowed-origins: http://localhost:3000,http://localhost:4200
+
+# File Upload Configuration
+file:
+  upload-dir: ./uploads
+  max-size: 10485760 # 10MB
+
+# Logging
+logging:
+  level:
+    com.chat: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    org.springframework.messaging: DEBUG
+
